@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app-guarantee:
+    container_name: guarantee-app
+    build:
+      context: ./cathay-vn-comp-service-guarantee
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./logs:/app/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  app-guarantee-queue:
+    container_name: guarantee-queue-app
+    build:
+        context: ./cathay-vn-comp-service-guarantee-queue
+        dockerfile: Dockerfile
+    ports:
+        - "8080:8080"
+    volumes:
+        - ./logs:/app/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
